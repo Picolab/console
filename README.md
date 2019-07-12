@@ -29,7 +29,8 @@ The rule which selects on "console/expr" does the following:
 If the expression entered, when incorporated into the test ruleset, causes a compile-time error,
 the bad ruleset will still be registered with the pico engine, in an inactive state.
 
-When this happens, you will have to delete it manually in the Engine Rulesets page.
+When this happens, you will have to manually delete the child pico (in the About tab of your pico),
+and the test ruleset (in the Engine Rulesets page).
 
 ## sample expressions
 

@@ -40,3 +40,7 @@ and the test ruleset (in the Engine Rulesets page).
 
 `355/113` for an approximation of _pi_
 
+## ruleset link
+
+https://raw.githubusercontent.com/Picolab/console/master/krl/console.krl
+

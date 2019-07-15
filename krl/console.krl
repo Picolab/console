@@ -17,7 +17,9 @@ ruleset console {
   }
   rule create_child_pico {
     select when console expr
-      expr re#(.+)# setting(expr)
+    pre {
+      expr = event:attr("expr")
+    }
     fired {
       raise wrangler event "new_child_request" attributes {
         "name": random:uuid(), "rids": [meta:rid], "expr": expr

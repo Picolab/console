@@ -9,10 +9,26 @@ ruleset console {
       [ { "domain": "console", "type": "expr", "attrs": [ "expr" ] }
       ]
     }
+    um = <<
+      use module io.picolabs.wrangler alias wrangler
+      use module io.picolabs.subscription alias subs
+      use module io.picolabs.visual_params alias v_p
+    >>
+    mt = <<
+      meta {#{um}shares result
+      }
+    >>
     rs = function(expr){
       rsn = random:uuid();
       e = expr.math:base64decode().klog("e");
-      <<ruleset #{rsn}{meta{shares result}global{result=function(){#{e}}}}>>
+      <<ruleset #{rsn}{
+#{mt}
+  global {
+    result=function(){
+      #{e}
+    }
+  }
+}>>
     }
   }
   rule create_child_pico {

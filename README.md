@@ -44,3 +44,12 @@ and the test ruleset (in the Engine Rulesets page).
 
 https://raw.githubusercontent.com/Picolab/console/master/krl/console.krl
 
+## modules
+
+Since _every_ pico has the following rulesets installed,
+we have added support for using any of them as modules in expressions to evaluate.
+
+- io.picolabs.wrangler (alias `wrangler`)
+- io.picolabs.subscription (alias `subs`)
+- io.picolabs.visual_params (alias `v_p`)
+

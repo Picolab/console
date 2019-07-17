@@ -20,7 +20,7 @@ ruleset console {
     >>
     rs = function(expr){
       rsn = random:uuid();
-      e = expr.math:base64decode().klog("e");
+      e = expr.math:base64decode();
       <<ruleset #{rsn}{
 #{mt}
   global {

@@ -38,12 +38,14 @@ ruleset console {
     }
     fired {
       raise wrangler event "new_child_request" attributes {
-        "name": random:uuid(), "rids": [meta:rid], "expr": expr
+        "name": random:uuid(), "rids": [meta:rid],
+        "expr": expr, "txn_id": meta:txnId
       }
     }
   }
   rule evaluate_expression {
     select when wrangler new_child_created
+      where event:attr("rs_attrs"){"txn_id"} == meta:txnId
     pre {
       expr = event:attr("rs_attrs"){"expr"}
       e = expr.math:base64encode().replace(re#[+]#g,"-")
@@ -51,6 +53,7 @@ ruleset console {
       url = <<#{meta:host}/sky/cloud/#{eci}/console/rs.txt?expr=#{e}>>
       picoId = event:attr("id")
     }
+    if expr then
     every {
       engine:registerRuleset(url=url) setting(rid)
       engine:installRuleset(picoId,rid=rid)

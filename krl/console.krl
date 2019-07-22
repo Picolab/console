@@ -46,8 +46,9 @@ ruleset console {
   rule evaluate_expression {
     select when wrangler new_child_created
       where event:attr("rs_attrs"){"txn_id"} == meta:txnId
+        || event:attr("txn_id") == meta:txnId
     pre {
-      expr = event:attr("rs_attrs"){"expr"}
+      expr = event:attr("rs_attrs"){"expr"} || event:attr("expr")
       e = expr.math:base64encode().replace(re#[+]#g,"-")
       eci = event:attr("eci")
       url = <<#{meta:host}/sky/cloud/#{eci}/console/rs.txt?expr=#{e}>>

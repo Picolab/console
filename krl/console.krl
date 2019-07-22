@@ -62,7 +62,7 @@ ruleset console {
       engine:uninstallRuleset(picoId,rid)
       engine:unregisterRuleset(rid)
     }
-    fired {
+    always {
       raise wrangler event "child_deletion" attributes event:attrs
     }
   }

@@ -36,6 +36,7 @@ ruleset console {
     pre {
       expr = event:attr("expr")
     }
+    if expr then noop()
     fired {
       raise wrangler event "new_child_request" attributes {
         "name": random:uuid(), "rids": [meta:rid],

@@ -40,14 +40,13 @@ ruleset console {
     fired {
       raise wrangler event "new_child_request" attributes {
         "name": random:uuid(), "rids": [meta:rid],
-        "expr": expr, "txn_id": meta:txnId
+        "expr": expr
       }
     }
   }
   rule evaluate_expression {
     select when wrangler new_child_created
-      where event:attr("rs_attrs"){"txn_id"} == meta:txnId
-        || event:attr("txn_id") == meta:txnId
+      where event:attr("rids") >< meta:rid
     pre {
       expr = event:attr("rs_attrs"){"expr"} || event:attr("expr")
       e = expr.math:base64encode().replace(re#[+]#g,"-")

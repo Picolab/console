@@ -20,7 +20,7 @@ ruleset console {
     >>
     rs = function(expr){
       rsn = random:uuid();
-      e = expr.math:base64decode();
+      e = math:base64decode(expr);
       <<ruleset #{rsn}{
 #{mt}
   global {
@@ -49,7 +49,7 @@ ruleset console {
       where event:attr("rids") >< meta:rid
     pre {
       expr = event:attr("rs_attrs"){"expr"} || event:attr("expr")
-      e = expr.math:base64encode().replace(re#[+]#g,"-")
+      e = math:base64encode(expr).replace(re#[+]#g,"-")
       eci = event:attr("eci")
       url = <<#{meta:host}/sky/cloud/#{eci}/console/rs.txt?expr=#{e}>>
       picoId = event:attr("id")

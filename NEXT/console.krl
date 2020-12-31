@@ -12,7 +12,6 @@ ruleset console {
     um = <<
       use module io.picolabs.wrangler alias wrangler
       use module io.picolabs.subscription alias subs
-      use module io.picolabs.visual_params alias v_p
     >>
     mt = <<
       meta {#{um}shares result

@@ -114,11 +114,11 @@ ruleset console {
         attrs={
           "tags":["result"],
           "eventPolicy":{"allow":[],"deny":[{"domain":"*","name":"*"}]},
-          "queryPolicy":{"allow":[{"rid":rids[rids.length()-1],"name":"result"}],"deny":[]}
+          "queryPolicy":{"allow":[{"rid":rids.reverse().head(),"name":"result"}],"deny":[]}
         },rid="io.picolabs.wrangler",queryName="channels",
         args={"tags":"result"}
       ) setting(result_channel)
-      http:get(<<#{meta:host}/sky/cloud/#{result_channel.head(){"id"}}/#{rids[rids.length()-1]}/result>>) setting(res)
+      http:get(<<#{meta:host}/sky/cloud/#{result_channel.head(){"id"}}/#{rids.reverse().head()}/result>>) setting(res)
       send_directive("_txt",{"content":res{"content"}})
     }
     fired {
